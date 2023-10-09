@@ -1,39 +1,29 @@
-let state = {};
-const subscribers = [];
-const middleware = [];
+import React, { useContext, useState, createContext } from "react";
 
-function setState(newState) {
-  state = { ...state, ...newState };
-  subscribers.forEach((callback) => callback());
+const GlobalStateContext = createContext();
+
+export function GlobalStateProvider({ children }) {
+  const [globalState, setGlobalState] = useState({});
+  return (
+    <GlobalStateContext.Provider value={[globalState, setGlobalState]}>
+      {children}
+    </GlobalStateContext.Provider>
+  );
 }
 
-function useMyState() {
-  function subscribe(callback) {
-    subscribers.push(callback);
-    return () => {
-      const index = subscribers.indexOf(callback);
-      if (index !== -1) {
-        subscribers.splice(index, 1);
-      }
-    };
+export function useMyState(variableName) {
+  const [globalState, setGlobalState] = useContext(GlobalStateContext);
+
+  if (!globalState.hasOwnProperty(variableName)) {
+    setGlobalState((prevState) => ({
+      ...prevState,
+      [variableName]: undefined,
+    }));
   }
 
-  function applyMiddleware(action) {
-    middleware.forEach((middlewareFunc) => {
-      middlewareFunc(action, state, setState);
-    });
-  }
+  const setState = (newValue) => {
+    setGlobalState((prevState) => ({ ...prevState, [variableName]: newValue }));
+  };
 
-  function dispatch(action) {
-    applyMiddleware(action);
-    setState(action.payload);
-  }
-
-  return [state, dispatch, subscribe, applyMiddleware];
+  return [globalState[variableName], setState];
 }
-
-function applyMiddleware(middlewareFunc) {
-  middleware.push(middlewareFunc);
-}
-
-export { useMyState, applyMiddleware };

@@ -25,11 +25,6 @@
   },
   "homepage": "https://github.com/ibttf/tinydux#readme",
   "dependencies": {
-    "@babel/core": "^7.23.0",
     "react": "^18.2.0"
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.22.20",
-    "@babel/preset-react": "^7.22.15"
   }
 }
