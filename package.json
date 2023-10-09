@@ -1,0 +1,35 @@
+{
+  "name": "tinydux",
+  "version": "1.0.0",
+  "description": "simple global state management tool for react",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibttf/tinydux.git"
+  },
+  "keywords": [
+    "react",
+    "state",
+    "management",
+    "redux",
+    "global",
+    "state"
+  ],
+  "author": "Roy Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ibttf/tinydux/issues"
+  },
+  "homepage": "https://github.com/ibttf/tinydux#readme",
+  "dependencies": {
+    "@babel/core": "^7.23.0",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-react": "^7.22.15"
+  }
+}
