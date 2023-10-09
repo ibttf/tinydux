@@ -8,8 +8,6 @@ function setState(newState) {
 }
 
 function useMyState() {
-  const currentState = state;
-
   function subscribe(callback) {
     subscribers.push(callback);
     return () => {
@@ -22,7 +20,7 @@ function useMyState() {
 
   function applyMiddleware(action) {
     middleware.forEach((middlewareFunc) => {
-      middlewareFunc(action, currentState, setState);
+      middlewareFunc(action, state, setState);
     });
   }
 
@@ -31,7 +29,7 @@ function useMyState() {
     setState(action.payload);
   }
 
-  return [currentState, dispatch, subscribe, applyMiddleware];
+  return [state, dispatch, subscribe, applyMiddleware];
 }
 
 function applyMiddleware(middlewareFunc) {
